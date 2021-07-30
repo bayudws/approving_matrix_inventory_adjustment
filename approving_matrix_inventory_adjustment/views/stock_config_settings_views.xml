@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="approval_matrix_inventory_adj_stock_config_inherit" model="ir.ui.view">
+        <field name="name">stock.config.settings.inherit.form</field>
+        <field name="model">stock.config.settings</field>
+        <field name="inherit_id" ref="inventory_approval_matrix.approval_stock_config_inherit"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='approval_matrix']" position="inside">
+                    <field name="approval_adjustment" style="width:20%;"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

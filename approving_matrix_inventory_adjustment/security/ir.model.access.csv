@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_inv_adj_approving_matrix,inv_adj_approving_matrix,model_inv_adj_approving_matrix,,1,1,1,1
+access_inv_adj_approving_matrix_line,inv_adj_approving_matrix_line,model_inv_adj_approving_matrix_line,,1,1,1,1

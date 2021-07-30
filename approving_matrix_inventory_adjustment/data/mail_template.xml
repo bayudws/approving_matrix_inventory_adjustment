@@ -1,0 +1,49 @@
+<odoo>
+    <data>
+
+        <record id="email_template_request_for_approval" model="mail.template">
+            <field name="name">Request for Approval Notification Email</field>
+            <field name="email_from">${ctx['email_from']|safe}</field>
+            <field name="subject">Request For Approval</field>
+            <field name="email_to">${ctx['email_to']|safe}</field>
+            <field name="model_id" ref="stock.model_stock_inventory"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html"><![CDATA[
+                <p>Dear ${ctx.get('approver_name')},</p>
+                <p>You have one record is on Waiting for Approval by ${ctx.get('requested_by')} for inventory:</p>
+                <p>Adjustment in reference :${object.Seq_num}</p>
+                <p>Thank You.</p>
+                ]]></field>
+        </record>
+
+        <record id="email_template_adjusment_user_approval_mail" model="mail.template">
+            <field name="name">Approval Notification Email</field>
+            <field name="email_from">${ctx['email_from']|safe}</field>
+            <field name="subject">Approval</field>
+            <field name="email_to">${ctx['email_to']|safe}</field>
+            <field name="model_id" ref="stock.model_stock_inventory"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html"><![CDATA[
+                <p>Dear ${ctx.get('approver_name')},</p>
+                <p>You have one record is to Approve by you for inventory:</p>
+                <p>Adjustment in reference :${object.Seq_num}</p>
+                <p>Thank You.</p>
+                ]]></field>
+        </record>
+
+        <record id="email_template_adjusment_final_user_approval_mail" model="mail.template">
+            <field name="name">Approval Notification Email</field>
+            <field name="email_from">${ctx['email_from']|safe}</field>
+            <field name="subject">Approval</field>
+            <field name="email_to">${ctx['email_to']|safe}</field>
+            <field name="model_id" ref="stock.model_stock_inventory"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html"><![CDATA[
+                <p>Dear ${ctx.get('approver_name')},</p>
+                <p>You have operation for stock in inventory adjustment with reference :${object.Seq_num}</p>
+                <p>Thank You.</p>
+                ]]></field>
+        </record>
+
+    </data>
+</odoo>

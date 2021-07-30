@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="view_inv_adj_approve_matrix_form">
+        <field name="name">inv_adj.approving_matrix.form</field>
+        <field name="model">inv_adj.approving_matrix</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="company_id"/>
+                            <field name="branch_id"/>
+                            <field name="warehouse_id"/>
+                        </group>
+                        <group>
+                            <field name="create_uid" string="Created By" readonly="1"/>
+                            <field name="create_date" string="Created Date" readonly="1"/>
+                            <field name="filter_location_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="location_ids" widget="many2many_tags" domain="[('id', 'not in', filter_location_ids and filter_location_ids[0] and filter_location_ids[0][2])]"/>
+                            <field name="adj_type"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string='Approve Matrix Lines'>
+                            <field name="matrix_line_ids" context="{'matrix_line_ids':matrix_line_ids}">
+                                <tree editable="bottom" default_order="sequence">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="sequence" string="Sequence" readonly="1"/>
+                                    <field name="approver" options="{'no_create_edit': True}" widget="many2many_tags"/>
+                                    <field name="minimal_approval"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string='Details'>
+                            <field name="location_child_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_inv_adj_approve_matrix_tree">
+        <field name="name">inv_adj.approving_matrix.tree</field>
+        <field name="model">inv_adj.approving_matrix</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="warehouse_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_inv_adj_approve_matrix_search">
+        <field name="name">inv_adj.approving_matrix.search</field>
+        <field name="model">inv_adj.approving_matrix</field>
+        <field name="arch" type="xml">
+            <search string="Approval Matrix">
+                <field name="name"/>
+                <field name="warehouse_id"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_inv_adj_approving_matrix" model="ir.actions.act_window">
+        <field name="name">Inventory Adjustment Approving Matrix</field>
+        <field name="res_model">inv_adj.approving_matrix</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_inv_adj_approve_matrix_search"/>
+    </record>
+
+    <menuitem
+        id="menu_inv_adj_approving_matrix"
+        name="Inventory Adjustment Approving Matrix"
+        parent="inventory_approval_matrix.menu_approval_matrix"
+        action="action_inv_adj_approving_matrix"
+        sequence="4"/>
+
+</odoo>
